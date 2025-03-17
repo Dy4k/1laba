@@ -30,7 +30,7 @@ int main() {
         cout << "Ошибка: сумма любых трёх сторон должна быть больше длины четвёртой стороны." << endl;
         return 1;
     }
-    if ( height >  side 2  or  height > side 1 ) { 
+    if ( height >  side2  ||  height > side1 ) { 
 	cout << "ошибка" << endl;
 	return 1;
     }
