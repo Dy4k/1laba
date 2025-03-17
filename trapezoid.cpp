@@ -30,6 +30,10 @@ int main() {
         cout << "Ошибка: сумма любых трёх сторон должна быть больше длины четвёртой стороны." << endl;
         return 1;
     }
+    if ( height >  side 2  or  height > side 1 ) { 
+	cout << "ошибка" << endl;
+	return 1;
+    }
 
     // Средняя линия
     double midline = (base1 + base2) / 2;
