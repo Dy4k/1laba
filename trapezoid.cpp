@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>;
 using namespace std;
 
 int main() {
@@ -14,7 +15,10 @@ int main() {
     cin >> side1;
     cout << "Введите длину второй боковой стороны: ";
     cin >> side2;
-
+    if  (base1 < 0 or base2 < 0 or height < 0 or side1 < 0 or side2 < 0){
+	cout << " ошибка" <<endl;
+	return 1;
+    }
     // Средняя линия
     double midline = (base1 + base2) / 2;
 
