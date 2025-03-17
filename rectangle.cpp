@@ -9,7 +9,7 @@ int main() {
     cin >> length;
     cout << "Введите ширину прямоугольника: ";
     cin >> width;
-    if (lenght < 0 || width < 0) {
+    if (length < 0 || width < 0) {
         cout<< "Ошибка" << endl;
         return 1;
     }
