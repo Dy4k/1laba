@@ -17,8 +17,8 @@ int main() {
     cin >> side2;
 
     // Проверка на неотрицательные значения
-    if (base1 <= 0 || base2 <= 0 || height <= 0 || side1 <= 0 || side2 <= 0) {
-        cout << "Ошибка: длины должны быть положительными числами." << endl;
+    if (base1 <= 0 || base2 <= 0 || height <= 0 || side1 <= 0 || side2 <= 0 || height > side1 || height > side2) {
+        cout << "Ошибка." << endl;
         return 1;
     }
 
@@ -29,10 +29,6 @@ int main() {
         (base2 + side1 + side2 <= base1)) {
         cout << "Ошибка: сумма любых трёх сторон должна быть больше длины четвёртой стороны." << endl;
         return 1;
-    }
-    if ( height >  side2  ||  height > side1 ) { 
-	cout << "ошибка" << endl;
-	return 1;
     }
 
     // Средняя линия
