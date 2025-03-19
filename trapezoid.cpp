@@ -44,6 +44,5 @@ int main() {
     cout << "Длина средней линии: " << midline << endl;
     cout << "Периметр трапеции: " << perimeter << endl;
     cout << "Площадь трапеции: " << area << endl;
-
     return 0;
 }
