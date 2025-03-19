@@ -9,12 +9,17 @@ int main() {
     cin >> length;
     cout << "Введите ширину прямоугольника: ";
     cin >> width;
+    if (length < 0 || width < 0) {
+        cout<< "Ошибка" << endl;
+        return 1;
+    }
+
 
     //Периметр
     double perimeter = 2 * (length + width);
 
     //Площадь
-    double area = length * width;
+    double area = (length * width);
 
     //Диагональ
     double diagonal = sqrt(length * length + width * width);
