@@ -1,0 +1,30 @@
+def count_zeros(n)
+  zeros = 0
+  while n > 0
+    n /= 5
+    zeros += n
+  end
+  zeros
+end
+
+puts "Введите число:"
+input_str = gets
+if input_str.nil?
+  puts "Ошибка: не удалось прочитать ввод!"
+  exit(1)
+end
+
+begin
+  n_input = Integer(input_str.chomp)
+rescue ArgumentError
+  puts "Ошибка: введите целое число!"
+  exit(1)
+end
+
+if n_input < 0
+  puts "Ошибка: введите положительное число!"
+  exit(1)
+end
+
+puts "Количество конечных нулей: #{count_zeros(n_input)}"
+exit(0)

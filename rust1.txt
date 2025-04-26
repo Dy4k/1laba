@@ -1,0 +1,37 @@
+use std::io::{self, Write};
+
+fn count_zeros(n: i32) -> i32 {
+    let mut zeros = 0;
+    let mut current_n = n;
+    while current_n > 0 {
+        current_n /= 5;
+        zeros += current_n;
+    }
+    zeros
+}
+
+fn main() {
+    let mut n_str = String::new();
+
+    print!("Введите число:\n");
+    io::stdout().flush().expect("Failed to flush stdout");
+
+    io::stdin()
+        .read_line(&mut n_str)
+        .expect("Failed to read line");
+
+    let n: i32 = match n_str.trim().parse() {
+        Ok(num) => num,
+        Err(_) => {
+            eprintln!("Ошибка: введите корректное число!");
+            std::process::exit(1);
+        }
+    };
+
+    if n < 0 {
+        eprintln!("Ошибка: введите положительное число!");
+        std::process::exit(1);
+    }
+
+    println!("Количество конечных нулей: {}", count_zeros(n));
+}

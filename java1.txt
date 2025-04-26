@@ -1,0 +1,25 @@
+import java.util.Scanner;
+
+public class FactorialZeros {
+    public static int count_zeros(int n) {
+        int zeros = 0;
+        while (n > 0) {
+            n /= 5;
+            zeros += n;
+        }
+        return zeros;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Введите число:");
+        int N = scanner.nextInt();
+        if (N < 0) {
+            System.out.println("Ошибка: введите положительное число!");
+            scanner.close();
+            System.exit(1);
+        }
+        System.out.println("Количество конечных нулей: " + count_zeros(N));
+        scanner.close();
+    }
+}

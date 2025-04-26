@@ -1,0 +1,30 @@
+const readline = require('readline/promises').createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+function count_zeros(n) {
+  let zeros = 0;
+  let current_n = Math.floor(n);
+  while (current_n > 0) {
+    current_n = Math.floor(current_n / 5);
+    zeros += current_n;
+  }
+  return zeros;
+}
+
+async function main() {
+  console.log("Введите число:");
+  const input = await readline.question('');
+  const N = parseInt(input, 10);
+  if (isNaN(N) || N < 0) {
+    console.log("Ошибка: введите положительное число!");
+    readline.close();
+    process.exit(1);
+    return;
+  }
+  console.log("Количество конечных нулей: " + count_zeros(N));
+  readline.close();
+}
+
+main();

@@ -1,0 +1,32 @@
+package main
+
+import (
+    "fmt"
+    "os"
+)
+
+func countZeros(n int) int {
+    zeros := 0
+    for n > 0 {
+        n /= 5
+        zeros += n
+    }
+    return zeros
+}
+
+func main() {
+    var N int
+    fmt.Println("Введите число:")
+    _, err := fmt.Scanln(&N)
+    if err != nil {
+        fmt.Println("Ошибка: неверный ввод, введите целое число!")
+        os.Exit(1)
+    }
+
+    if N < 0 {
+        fmt.Println("Ошибка: введите положительное число!")
+        os.Exit(1)
+    }
+
+    fmt.Println("Количество конечных нулей: ", countZeros(N))
+}

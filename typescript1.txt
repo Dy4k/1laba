@@ -1,0 +1,29 @@
+import * as readline from 'readline';
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+function count_zeros(n: number): number {
+  let zeros = 0;
+  let currentN = n;
+  while (currentN > 0) {
+    currentN = Math.floor(currentN / 5);
+    zeros += currentN;
+  }
+  return zeros;
+}
+
+rl.question("Введите число:\n", (input: string) => {
+  const N = parseInt(input, 10);
+  if (isNaN(N) || N < 0) {
+    console.log("Ошибка: введите положительное число!");
+    rl.close();
+    process.exit(1);
+  } else {
+    console.log(`Количество конечных нулей: ${count_zeros(N)}`);
+    rl.close();
+    process.exit(0);
+  }
+});
