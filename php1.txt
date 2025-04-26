@@ -1,0 +1,19 @@
+<?php
+function count_zeros(int $n): int {
+    $zeros = 0;
+    while ($n > 0) {
+        $n = floor($n / 5);
+        $zeros += $n;
+    }
+    return $zeros;
+}
+
+echo "Введите число:" . PHP_EOL;
+$input = readline();
+$N = (int)$input;
+if ($N < 0) {
+    echo "Ошибка: введите положительное число!" . PHP_EOL;
+    exit(1);
+}
+echo "Количество конечных нулей: " . count_zeros($N) . PHP_EOL;
+?>

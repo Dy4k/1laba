@@ -1,0 +1,24 @@
+import Foundation
+
+func count_zeros(_ n: Int) -> Int {
+    var currentN = n
+    var zeros = 0
+    while currentN > 0 {
+        currentN /= 5
+        zeros += currentN
+    }
+    return zeros
+}
+
+print("Введите число:")
+if let line = readLine(), let number = Int(line) {
+    if number < 0 {
+        print("Ошибка: введите положительное число!")
+        exit(1)
+    } else {
+        print("Количество конечных нулей: \(count_zeros(number))")
+    }
+} else {
+    print("Ошибка: введено не число!")
+    exit(1)
+}

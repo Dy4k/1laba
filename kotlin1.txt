@@ -1,0 +1,24 @@
+fun countZeros(n: Int): Int {
+    var zeros = 0
+    var number = n
+    while (number > 0) {
+        number /= 5
+        zeros += number
+    }
+    return zeros
+}
+
+fun main() {
+    println("Введите число:")
+    val N = readLine()?.toIntOrNull() ?: run {
+        println("Ошибка: введите положительное число!")
+        return
+    }
+    
+    if (N <= 0) {
+        println("Ошибка: введите положительное число!")
+        return
+    }
+    
+    println("Количество конечных нулей: ${countZeros(N)}")
+}
