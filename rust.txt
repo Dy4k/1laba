@@ -1,0 +1,52 @@
+use std::io::{self, BufRead};
+use std::str::FromStr;
+
+// Функция для вычисления суммы цифр числа
+fn sum_digits(n: i32) -> i32 {
+    let mut n_abs = n.abs(); 
+    let mut sum = 0;
+    while n_abs > 0 {
+        sum += n_abs % 10;
+        n_abs /= 10;
+    }
+    sum // Возвращаем сумму цифр
+}
+
+fn main() {
+    println!("Введите числа:"); 
+    let mut line = String::new();
+    let stdin = io::stdin();
+    // Считываем строку ввода
+    stdin.lock().read_line(&mut line).expect("Ошибка при чтении строки");
+
+    // Разбиваем строку по пробельным символам
+    let parts = line.split_whitespace();
+
+    // Объявляем вектор для подходящих чисел
+    let mut numbers: Vec<i32> = Vec::new();
+
+    for s_num in parts {
+        // Пытаемся преобразовать строку в число
+        if let Ok(num) = i32::from_str(s_num) {       
+            if num.abs() >= 10 && sum_digits(num) < 10 {
+                numbers.push(num);
+            }
+        }
+    }
+
+    if !numbers.is_empty() {
+        numbers.sort(); 
+        println!("Числа, сумма цифр которого состоит из одного десятичного разряда:");
+        let mut first = true;
+        for number in numbers {
+            if !first {
+                print!(" ");
+            }
+            print!("{}", number);
+            first = false;
+        }
+        println!();
+    } else {
+        println!("Нет подходящих чисел");
+    }
+}

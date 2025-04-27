@@ -1,0 +1,41 @@
+import kotlin.math.abs
+import java.util.ArrayList // Для работы с ArrayList
+import java.util.Collections // Для сортировки
+
+// Функция для вычисления суммы цифр числа
+fun sumDigits(n: Int): Int {
+    var localN = abs(n) 
+    var sum = 0
+    while (localN > 0) {
+        sum += localN % 10
+        localN /= 10
+    }
+    return sum
+}
+
+fun main() {
+    println("Введите числа:")
+    val line = readLine()
+    val numbers = ArrayList<Int>()
+
+    if (line != null) {
+        // Разбиваем строку по пробелам, фильтруем пустые части и преобразуем в числа
+        val potentialNumbers = line.trim().split(Regex("\\s+"))
+            .mapNotNull { it.toIntOrNull() }
+
+        for (num in potentialNumbers) {
+            // Рассматриваем только числа с минимум двумя цифрами и с суммой цифр меньше 10
+            if (abs(num) >= 10 && sumDigits(num) < 10) {
+                numbers.add(num)
+            }
+        }
+    }
+
+    if (numbers.isNotEmpty()) {
+        Collections.sort(numbers)
+        println("Числа, сумма цифр которого состоит из одного десятичного разряда:")
+        println(numbers.joinToString(" "))
+    } else {
+        println("Нет подходящих чисел")
+    }
+}

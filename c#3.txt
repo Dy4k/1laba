@@ -1,0 +1,60 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
+public class Program
+{
+    // Функция для вычисления суммы цифр числа
+    public static int SumDigits(int n)
+    {
+        n = Math.Abs(n); 
+        int sum = 0;
+        while (n > 0)
+        {
+            sum += n % 10;
+            n /= 10;
+        }
+        return sum;
+    }
+
+    public static void Main(string[] args)
+    {
+        Console.WriteLine("Введите числа:"); 
+        string line = Console.ReadLine();    
+
+        List<int> Numbers = new List<int>();  // Список для подходящих чисел
+
+        // Разбиваем строку по пробелам с удалением пустых элементов
+        string[] numberStrings = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+        foreach (string numStr in numberStrings)
+        {
+            int num;
+            if (int.TryParse(numStr, out num))
+            {
+                // Рассматриваем числа с минимум двумя цифрами и с суммой цифр меньше 10
+                if (Math.Abs(num) >= 10 && SumDigits(num) < 10)
+                {
+                    Numbers.Add(num);
+                }
+            }
+        }
+
+        if (Numbers.Count > 0)
+        {
+            Numbers.Sort();
+            Console.WriteLine("Числа, сумма цифр которого состоит из одного десятичного разряда:");
+            foreach (int number in Numbers)
+            {
+                Console.Write(number + " ");
+            }
+            Console.WriteLine();
+        }
+        else
+        {
+            Console.WriteLine("Нет подходящих чисел");
+        }
+    }
+}
+

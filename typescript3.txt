@@ -1,0 +1,54 @@
+import * as readline from 'readline';
+import { stdin as input, stdout as output } from 'process';
+
+// Функция для вычисления суммы цифр числа
+function sumDigits(n: number): number {
+    n = Math.abs(n); 
+    let sum: number = 0;
+    while (n > 0) {
+        sum += n % 10;
+        n = Math.floor(n / 10); // Целочисленное деление
+    }
+    return sum;
+}
+
+async function main() {
+    const rl = readline.createInterface({ input, output });
+    const question = (query: string): Promise<string> => {
+        return new Promise((resolve) => {
+            rl.question(query, resolve);
+        });
+    };
+
+    console.log("Введите числа:");
+    const line: string = await question('');
+
+    // Разбиваем строку по пробелам, фильтруем пустые строки,
+    // преобразуем в числа и фильтруем нечисловые значения
+    const potentialNumbers: number[] = line
+        .split(' ')
+        .filter(s => s.length > 0)
+        .map(s => parseInt(s, 10))
+        .filter(n => !isNaN(n));
+
+    let Numbers: number[] = [];
+
+    for (const num of potentialNumbers) {
+        // Рассматриваем только числа с минимум двумя цифрами и суммой цифр меньше 10
+        if (Math.abs(num) >= 10 && sumDigits(num) < 10) {
+            Numbers.push(num);
+        }
+    }
+
+    if (Numbers.length > 0) {
+        Numbers.sort((a, b) => a - b);
+        console.log("Числа, сумма цифр которого состоит из одного десятичного разряда:");
+        console.log(Numbers.join(" "));
+    } else {
+        console.log("Нет подходящих чисел");
+    }
+
+    rl.close();
+}
+
+main();

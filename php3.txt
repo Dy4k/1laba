@@ -1,0 +1,50 @@
+<?php
+// Аналог iostream, sstream, cmath, string, vector, algorithm не требуется явно подключать в PHP для базовых операций
+
+// Функция для вычисления суммы цифр числа
+function sumDigits(int $n) : int {
+    $n = abs($n);
+    $sum = 0;
+    while ($n > 0) {
+        $sum += $n % 10;
+        // В PHP деление целых чисел может привести к float, поэтому используем приведение к int после деления
+        $n = (int)($n / 10);
+    }
+    return $sum;
+}
+
+// Аналог main() начинается здесь
+
+echo "Введите числа:" . PHP_EOL;
+$line = fgets(STDIN);
+$parts = array_filter(explode(' ', trim($line)), function($value) { return $value !== ''; });
+
+//объявление переменной num и списка подходящих чисел
+$Numbers = [];
+
+// обработка каждого элемента ввода
+foreach ($parts as $part) {
+    // Проверяем, является ли часть строки числом
+    if (is_numeric($part)) {
+        $num = (int)$part; // Преобразуем строку в целое число
+
+        // Рассматриваем только числа с минимум двумя цифрами и с суммой цифр однозначной (меньше 10)
+        if (abs($num) >= 10 && sumDigits($num) < 10) {
+            // Добавляем число в список
+            $Numbers[] = $num;
+        }
+    }
+}
+
+// Если список не пуст, сортируем числа и выводим результат
+if (!empty($Numbers)) {
+    sort($Numbers, SORT_NUMERIC);
+    echo "Числа, сумма цифр которого состоит из одного десятичного разряда:" . PHP_EOL;
+    echo implode(' ', $Numbers);
+    echo PHP_EOL;
+} else {
+    echo "Нет подходящих чисел" . PHP_EOL;
+}
+
+// завершение скрипта (return 0 не требуется в PHP)
+?>

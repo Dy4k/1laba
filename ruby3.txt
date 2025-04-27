@@ -1,0 +1,39 @@
+# Функция для вычисления суммы цифр числа
+def sumDigits(n)
+    n = n.abs
+    sum = 0
+    while n > 0
+        sum += n % 10
+        n /= 10
+    end
+    return sum
+end
+
+puts "Введите числа:"  # Вывод приглашения ко вводу
+line = gets           # Считывание строки ввода
+line = line.chomp if line  # Удаление символа перевода строки
+
+Numbers = []          # Массив для хранения подходящих чисел
+
+if line
+  line.split.each do |str_num|
+      begin
+          num = Integer(str_num)
+          # Рассматриваем только числа с минимум двумя цифрами и с суммой цифр меньше 10
+          if num.abs >= 10 && sumDigits(num) < 10
+              Numbers.push(num)
+          end
+      rescue ArgumentError
+          # Пропускаем нечисловые значения
+      end
+  end
+end
+
+if !Numbers.empty?
+    Numbers.sort!
+    puts "Числа, сумма цифр которого состоит из одного десятичного разряда:"
+    print Numbers.join(" ")
+    puts
+else
+    puts "Нет подходящих чисел"
+end

@@ -1,0 +1,74 @@
+package main
+
+import (
+    "bufio"    // Для чтения ввода построчно
+    "fmt"      // Для форматированного вывода
+    "os"       // Для работы со стандартным вводом/выводом
+    "sort"     // Для сортировки срезов
+    "strconv"  // Для преобразования строки в число
+    "strings"  // Для работы со строками (разделение)
+)
+
+// Функция для вычисления абсолютного значения числа
+func absInt(n int) int {
+    if n < 0 {
+        return -n
+    }
+    return n
+}
+
+// Функция для вычисления суммы цифр числа
+func sumDigits(n int) int {
+    n = absInt(n) 
+    sum := 0
+    for n > 0 {
+        sum += n % 10
+        n /= 10
+    }
+    return sum
+}
+
+func main() {
+
+    fmt.Println("Введите числа:") 
+    scanner := bufio.NewScanner(os.Stdin)
+    line := ""
+    if scanner.Scan() {
+        line = scanner.Text() // Получаем введенную строку
+    }
+    // Проверяем наличие ошибок при чтении ввода
+    if err := scanner.Err(); err != nil {
+        fmt.Fprintln(os.Stderr, "Ошибка чтения ввода:", err)
+        return
+    }
+
+    // Разбиваем строку по пробельным символам
+    words := strings.Fields(line)
+
+    // Объявляем срез для хранения подходящих чисел
+    var Numbers []int
+
+    for _, word := range words {
+        // Пробуем преобразовать слово в число
+        num, err := strconv.Atoi(word)
+        if err != nil {
+            continue
+        }
+        // Рассматриваем только числа с минимум двумя цифрами и с суммой цифр однозначной (меньше 10)
+        if absInt(num) >= 10 && sumDigits(num) < 10 {
+            Numbers = append(Numbers, num)
+        }
+    }
+
+    // Если найдены подходящие числа, сортируем и выводим их
+    if len(Numbers) > 0 {
+        sort.Ints(Numbers)
+        fmt.Println("Числа, сумма цифр которого состоит из одного десятичного разряда:")
+        for _, number := range Numbers {
+            fmt.Printf("%d ", number)
+        }
+        fmt.Println()
+    } else {
+        fmt.Println("Нет подходящих чисел")
+    }
+}

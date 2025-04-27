@@ -1,0 +1,35 @@
+import Foundation
+
+// Функция для вычисления суммы цифр числа
+func sumDigits(_ n: Int) -> Int {
+    var num = abs(n) 
+    var sum = 0
+    while num > 0 {
+        sum += num % 10
+        num /= 10
+    }
+    return sum
+}
+
+print("Введите числа:")
+let line = readLine()
+
+var numbers: [Int] = []
+
+if let inputLine = line, !inputLine.isEmpty {
+    let potentialNumbers = inputLine.split(separator: " ").compactMap { Int($0) }
+    for num in potentialNumbers {
+        // Рассматриваем только числа, состоящие минимум из двух цифр, и с суммой цифр меньше 10
+        if abs(num) >= 10 && sumDigits(num) < 10 {
+            numbers.append(num)
+        }
+    }
+}
+
+if !numbers.isEmpty {
+    numbers.sort()
+    print("Числа, сумма цифр которого состоит из одного десятичного разряда:")
+    print(numbers.map { String($0) }.joined(separator: " "))
+} else {
+    print("Нет подходящих чисел")
+}

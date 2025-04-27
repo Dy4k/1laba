@@ -1,0 +1,52 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.lang.Math;
+​
+public class Main {
+​
+    // Функция для вычисления суммы цифр числа
+    public static int sumDigits(int n) {
+        n = Math.abs(n); // Берем абсолютное значение числа
+        int sum = 0;
+        while (n > 0) {
+            sum += n % 10;
+            n /= 10;
+        }
+        return sum;
+    }
+​
+    public static void main(String[] args) {
+​
+        System.out.println("Введите числа:"); // Выводим приглашение ко вводу
+        Scanner consoleScanner = new Scanner(System.in); // Сканер для чтения ввода с консоли
+        String line = consoleScanner.nextLine(); // Считываем всю строку ввода
+        Scanner lineScanner = new Scanner(line); // Сканер для разбора строки
+​
+        int num;
+        ArrayList<Integer> Numbers = new ArrayList<>(); // Используем ArrayList для динамического массива чисел
+​
+        while (lineScanner.hasNextInt()) { // Пока есть следующее число
+            num = lineScanner.nextInt(); // Считываем число
+            // Рассматриваем только числа с минимум двумя цифрами и с суммой цифр, состоящей из одного десятичного разряда (меньше 10)
+            if (Math.abs(num) >= 10 && sumDigits(num) < 10) {
+                Numbers.add(num); // Добавляем число в список
+            }
+        }
+​
+        if (!Numbers.isEmpty()) { // Если список не пустой
+            Collections.sort(Numbers); // Сортируем список
+            System.out.println("Числа, сумма цифр которого состоит из одного десятичного разряда:");
+            for (int number : Numbers) { // Выводим числа в отсортированном порядке
+                System.out.print(number + " ");
+            }
+            System.out.println();
+        } else {
+            System.out.println("Нет подходящих чисел");
+        }
+​
+        consoleScanner.close();
+        lineScanner.close();
+    }
+}
+​

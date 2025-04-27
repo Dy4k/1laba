@@ -1,0 +1,21 @@
+def sumDigits(n):
+    n = abs(n)
+    sum = 0
+    while n > 0:
+        sum += n % 10
+        n //= 10
+    return sum
+def main():
+    print("Введите числа:")
+    line = input()  
+    numbers = []  
+    for num in map(int, line.split()):
+        if abs(num) >= 10 and sumDigits(num) < 10:
+            numbers.append(num)
+    if numbers:
+        numbers.sort()
+        print("Числа, сумма цифр которых состоит из одного десятичного разряда:")
+        print(" ".join(map(str, numbers)))
+    else:
+        print("Нет подходящих чисел")
+main()
