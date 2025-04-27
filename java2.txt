@@ -1,0 +1,46 @@
+// Scanner используется для считывания ввода из консоли.
+import java.util.Scanner;
+
+/* Объявляем публичный класс PangramChecker.Это основной класс нашей программы, где находится метод main — точка входа.
+ */
+public class PangramChecker {
+
+    /*
+     * Метод main — точка входа в программу.
+     * Его сигнатура (public static void main(String[] args)) является стандартом для запуска Java-приложений.
+     */
+    public static void main(String[] args) {
+        
+        System.out.println("Введите строку:");
+        
+        // Создаем объект Scanner для чтения ввода пользователя с консоли
+        Scanner scanner = new Scanner(System.in);
+        
+        // Считываем введенную пользователем строку
+        String sentence = scanner.nextLine();
+        
+        // Объявляем переменную letters, которая используется как битовая маска.
+        // Каждый из 26 младших битов представляет наличие строчной буквы от 'a' до 'z'.
+        int letters = 0;
+        
+        // Обходим каждый символ строки
+        for (int i = 0; i < sentence.length(); i++) {
+            char c = sentence.charAt(i);
+            // Проверяем, что символ находится в диапазоне от 'a' до 'z'
+            if (c >= 'a' && c <= 'z') {
+                // Вычисляем смещение относительно символа 'a' и устанавливаем соответствующий бит
+                letters |= (1 << (c - 'a'));
+            }
+        }
+        
+        // Если все 26 битов установлены, то letters равно (1 << 26) - 1.
+        // (1 << 26) - 1 создаёт число, в котором 26 младших битов равны 1.
+        if (letters == (1 << 26) - 1)
+            System.out.println("true");
+        else
+            System.out.println("false");
+        
+        // Закрываем Scanner для освобождения ресурса
+        scanner.close();
+    }
+}

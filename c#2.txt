@@ -1,0 +1,27 @@
+using System;
+
+namespace PangramChecker
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Введите строку:");
+            string sentence = Console.ReadLine();
+
+            // Используем битовую маску: каждый бит представляет строковую букву (a-z)
+            int letters = 0;
+            foreach (char c in sentence)
+            {
+                if (c >= 'a' && c <= 'z')
+                    letters |= (1 << (c - 'a'));
+            }
+            
+            // Если установлены все 26 битов, строка является панграммой
+            if (letters == (1 << 26) - 1)
+                Console.WriteLine("true");
+            else
+                Console.WriteLine("false");
+        }
+    }
+}

@@ -1,0 +1,28 @@
+const readline = require("readline"); // Импортируем модуль для чтения из консоли
+
+// Создаем интерфейс для работы с вводом/выводом
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+// считываем строку
+rl.question("Введите строку:\n", (sentence) => {
+  let letters = 0;
+  
+  // Проходим по каждому символу строки
+  for (let c of sentence) {
+    if (c >= 'a' && c <= 'z') {
+      // Вычисляем смещение и устанавливаем бит для буквы
+      letters |= 1 << (c.charCodeAt(0) - 'a'.charCodeAt(0));
+    }
+  }
+  
+  // Если все 26 битов установлены, выводим "true", иначе "false"
+  if (letters === (1 << 26) - 1)
+    console.log("true");
+  else
+    console.log("false");
+  
+  rl.close();
+});

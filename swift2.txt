@@ -1,0 +1,28 @@
+import * as readline from "readline";
+
+// Импортируем readline для работы с консольным вводом
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+rl.question("Введите строку:\n", (sentence: string) => {
+  let letters: number = 0;
+
+  for (let c of sentence) {
+    if (c >= "a" && c <= "z") {
+      // Устанавливаем бит для символа c, определяя смещение через ASCII-код
+      letters |= 1 << (c.charCodeAt(0) - "a".charCodeAt(0));
+    }
+  }
+
+  // Если все 26 битов установлены, то letters === (1 << 26) - 1
+  if (letters === (1 << 26) - 1) {
+    console.log("true");
+  } else {
+    console.log("false");
+  }
+
+  rl.close();
+});
